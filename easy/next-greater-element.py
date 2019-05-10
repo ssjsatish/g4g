@@ -1,26 +1,14 @@
-def next_greater(a):
+def next_greater(a,n):
     s = []
-    element = 0
-    next = 0
-    s.append(a[0])
-    for i in range(1, len(a)):
-        next = a[i]
-        if len(s) > 0:
-            element = s.pop()
-            while element < next:
-                print(next, end = ' ')
-                if len(s) == 0:
-                    break
-                element = s.pop()
-            if element > next:
-                s.append(element)
-        s.append(next)
-    while len(s) > 0:
-        element = s.pop()
-        next = next - 1
-        print(-1, end =' ')
-    print()
+    ans = [-1 for i in range(n)]
+    for i in range(n-1, -1, -1):
+        while s and s[-1]<=a[i]:
+            s.pop()
+        if len(s)>0:
+            ans[i] = s[-1]
+        s.append(a[i])
+    return ans
 
 a   = [    9, 2, 3, 5, 1,  6,   2 ]
 # ans = [ -1, 3, 5, 6, 6, -1, -1  ]
-next_greater(a)
+print(*(next_greater(a,len(a))))
